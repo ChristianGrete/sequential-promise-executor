@@ -1,0 +1,60 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "standard"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "impliedStrict": true
+    },
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "jest"
+  ],
+  "root": true,
+  "rules": {
+    "array-bracket-spacing": [
+      "warn",
+      "never"
+    ],
+    "computed-property-spacing": [
+      "warn",
+      "never"
+    ],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "warn",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "no-console": "warn",
+    "object-curly-spacing": [
+      "warn",
+      "never"
+    ],
+    "object-shorthand": [
+      "error",
+      "always",
+      {
+        "avoidExplicitReturnArrows": true
+      }
+    ],
+    "space-before-function-paren": [
+      "warn",
+      {
+        "anonymous": "always",
+        "asyncArrow": "always",
+        "named": "never"
+      }
+    ]
+  }
+}

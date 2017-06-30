@@ -1,0 +1,59 @@
+binary = "{$binary}"
+encoding = "UTF-8"
+exclude = "{$exclude,.DS_Store}"
+excludeInProject= "{node_modules}"
+excludeInFileChooser = "{$excludeInFileChooser,$excludeInProject}"
+excludeInFolderSearch = "{$excludeInFolderSearch,$excludeInProject}"
+include = "{$include,.{babelrc,e{ditorconfig,slintrc*},git?*,npm*,tm_properties,yarn*}}"
+invisiblesMap = " ␣\n↵\t⇥"
+projectDirectory = "$CWD"
+projectName = "sequential-promise-executor"
+rightWindowTitle = "${TM_FILEPATH:+ — ${TM_FILEPATH/${CWD}\///}}"
+scmBranch = "${TM_SCM_BRANCH:+@$TM_SCM_BRANCH}"
+leftWindowTitle = "$projectName$scmBranch"
+showIndentGuides = true
+showInvisibles = true
+softTabs = true
+softWrap = true
+spellChecking = false
+tabSize = 2
+windowTitle = "$leftWindowTitle$rightWindowTitle"
+wrapColumn = 80
+
+[ attr.untitled ]
+fileType = source.js
+
+[ source ]
+softWrap = false
+
+[ text.git-commit ]
+showIndentGuides = false
+softTabs = false
+softWrap = false
+spellChecking = true
+spellingLanguage = "en"
+tabSize = 4
+
+[ source.git-config ]
+showIndentGuides = false
+
+[ source.tm-properties ]
+showIndentGuides = false
+spellChecking = false
+
+[ text.html.markdown ]
+showIndentGuides = false
+softTabs = false
+spellChecking = true
+spellingLanguage = "en"
+tabSize = 4
+wrapColumn = "Use Window Frame"
+
+[ ".editorconfig" ]
+fileType = source.tm-properties
+
+[ ".gitignore" ]
+fileType = source.git-config
+
+[ "*.md" ]
+fileType = text.html.markdown

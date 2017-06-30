@@ -1,0 +1,66 @@
+{
+  "author": {
+    "email": "webmaster@christiangrete.com",
+    "name": "Christian Grete",
+    "url": "https://christiangrete.com"
+  },
+  "bugs": {
+    "email": "webmaster@christiangrete.com",
+    "url": "https://github.com/ChristianGrete/sequential-promise-executor/issues"
+  },
+  "contributors": [
+    {
+      "email": "webmaster@christiangrete.com",
+      "name": "Christian Grete",
+      "url": "https://christiangrete.com"
+    }
+  ],
+  "dependencies": {},
+  "description": "An executor that queues and resolves promises in series",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2016": "^6.24.1",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.8.0",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-jest": "^20.0.3",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^20.0.4",
+    "rimraf": "^2.6.1",
+    "uppercamelcase": "^3.0.0",
+    "webpack": "^3.0.0"
+  },
+  "files": [],
+  "homepage": "https://github.com/ChristianGrete/sequential-promise-executor",
+  "keywords": [],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "maintainers": [
+    {
+      "email": "webmaster@christiangrete.com",
+      "name": "Christian Grete",
+      "url": "https://christiangrete.com"
+    }
+  ],
+  "name": "@christiangrete/sequential-promise-executor",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ChristianGrete/sequential-promise-executor.git"
+  },
+  "scripts": {
+    "build": "webpack -p",
+    "clean": "babel-node scripts/clean.js",
+    "lint": "eslint webpack.config.babel.js scripts/ src/",
+    "start": "webpack --watch",
+    "test": "jest --coverage"
+  },
+  "version": "0.0.0"
+}
