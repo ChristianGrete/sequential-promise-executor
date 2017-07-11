@@ -10,9 +10,8 @@ function hasArgument($argument) {
 }
 
 const entries = [
-  '.DS_Store',
   'build/',
-  'npm-debug.log'
+  'coverage/'
 ]
 
 if (hasArgument('--all') || hasArgument('--dependencies')) {
