@@ -1,5 +1,6 @@
 const STATE_BUSY = 1
 const STATE_IDLE = 0
+const STATE_PAUSED = null
 
 const store = new Map()
 
@@ -51,7 +52,7 @@ class SequentialPromiseExecutor {
       }
     }))
 
-    return this.queue(...$factories)
+    return $factories.length > 0 ? this.queue(...$factories) : this
   }
 
   queue(...$factories) {
@@ -100,7 +101,7 @@ class SequentialPromiseExecutor {
   resume() {
     const _store = store.get(this)
 
-    if (_store.state === STATE_IDLE && _store.queue.length > 0) {
+    if (_store.state !== STATE_BUSY && _store.queue.length > 0) {
       _store.state = STATE_BUSY
 
       step.call(_store)
@@ -113,7 +114,7 @@ class SequentialPromiseExecutor {
     const _store = store.get(this)
 
     if (_store.state === STATE_BUSY) {
-      _store.state = STATE_IDLE
+      _store.state = STATE_PAUSED
     }
 
     return this
