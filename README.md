@@ -10,7 +10,7 @@
 
 To install this package to your [Node.js](https://nodejs.org) modules, simply run:
 ```sh
-npm i @christiangrete/sequential-promise-executor
+npm i -S @christiangrete/sequential-promise-executor
 ```
 Or, using [Yarn](https://yarnpkg.com), run:
 ```sh
