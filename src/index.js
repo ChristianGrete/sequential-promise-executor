@@ -1,6 +1,6 @@
 const STATE_BUSY = 1
-const STATE_IDLE = 0
-const STATE_PAUSED = null
+const STATE_IDLE = null
+const STATE_PAUSED = 0
 
 const store = new Map()
 
