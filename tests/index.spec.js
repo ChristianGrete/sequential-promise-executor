@@ -1,18 +1,18 @@
-import * as index from '.'
+import * as src from '../src'
 
-const indexHasOwnProperty = {}.hasOwnProperty.bind(index)
-const SequentialPromiseExecutor = index.SequentialPromiseExecutor
+const SequentialPromiseExecutor = src.SequentialPromiseExecutor
+const srcHasMember = {}.hasOwnProperty.bind(src)
 
 var subject
 
 describe('SequentialPromiseExecutor', () => {
   describe('when imported', () => {
     it('is available as default member', () => {
-      expect(indexHasOwnProperty('default')).toBe(true)
+      expect(srcHasMember('default')).toBe(true)
     })
 
     it('is also available as named member', () => {
-      expect(indexHasOwnProperty('SequentialPromiseExecutor')).toBe(true)
+      expect(srcHasMember('SequentialPromiseExecutor')).toBe(true)
     })
   })
 
