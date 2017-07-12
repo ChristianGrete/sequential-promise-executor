@@ -60,7 +60,7 @@
     "clean": "babel-node scripts/clean.js",
     "lint": "eslint webpack.config.babel.js scripts/ src/ tests/",
     "start": "webpack --watch",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "version": "0.0.0"
 }
