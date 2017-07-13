@@ -56,15 +56,21 @@ class SequentialPromiseExecutor {
   }
 
   queue(...$factories) {
+    var _store
+
     $factories.forEach($factory => {
       if (Array.isArray($factory)) {
         return this.queue(...$factory)
       }
 
       if (typeof $factory === 'function') {
-        store.get(this).queue.push($factory)
+        _store = store.get(this)
 
-        this.process()
+        _store.queue.push($factory)
+
+        if (_store.state !== STATE_PAUSED) {
+          this.process()
+        }
       }
     })
 
