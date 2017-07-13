@@ -60,6 +60,35 @@ describe('SequentialPromiseExecutor', () => {
       subject = new SequentialPromiseExecutor()
     })
 
-    // TODO
+    describe('.queue(...$factories)', () => {
+      // TODO
+    })
+
+    describe('.unqueue(...$factories)', () => {
+      // TODO
+    })
+
+    describe('.process()', () => {
+      beforeEach(() => {
+        subject.resume = jest.fn()
+        subject.process()
+      })
+
+      it('calls .resume()', () => {
+        expect(subject.resume).toHaveBeenCalled()
+      })
+    })
+
+    describe('.resume()', () => {
+      // TODO
+    })
+
+    describe('.pause()', () => {
+      // TODO
+    })
+
+    describe('.cancel()', () => {
+      // TODO
+    })
   })
 })
