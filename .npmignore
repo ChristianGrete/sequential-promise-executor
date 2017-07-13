@@ -21,8 +21,10 @@ Desktop.ini
 ehthumbs.db
 ehthumbs_vista.db
 node_modules/
+package-lock.json
 scripts/
 src/
 Thumbs.db
 yarn-debug.log*
 yarn-error.log*
+yarn.lock
