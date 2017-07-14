@@ -58,7 +58,7 @@
   "scripts": {
     "build": "webpack -p",
     "clean": "babel-node scripts/clean.js",
-    "lint": "eslint webpack.config.babel.js scripts/ src/ tests/",
+    "lint": "eslint webpack.config.babel.js scripts/ src/",
     "start": "webpack --watch",
     "test": "jest"
   },

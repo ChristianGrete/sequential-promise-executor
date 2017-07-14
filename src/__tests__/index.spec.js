@@ -1,4 +1,4 @@
-import * as src from '../../src'
+import * as src from '..'
 import { createPromiseFactory } from '../__support__'
 
 const SequentialPromiseExecutor = src.SequentialPromiseExecutor
