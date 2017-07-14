@@ -1,4 +1,5 @@
-import * as src from '../src'
+import * as src from '../../src'
+import { createPromiseFactory } from '../__support__'
 
 const SequentialPromiseExecutor = src.SequentialPromiseExecutor
 const srcHasMember = {}.hasOwnProperty.bind(src)
@@ -61,7 +62,53 @@ describe('SequentialPromiseExecutor', () => {
     })
 
     describe('.queue(...$factories)', () => {
-      // TODO
+      var _isRejection
+      var _onFulfilled
+      var _onRejected
+
+      describe('when promise is resolvable', () => {
+        beforeEach(() => {
+          _isRejection = false
+          _onRejected = jest.fn()
+        })
+
+        it("calls the promise' fulfillment handler", $done => {
+          function _onFulfilled() {
+            expect(_onRejected).not.toHaveBeenCalled()
+            $done()
+          }
+
+          const _factory = createPromiseFactory(
+            _onFulfilled,
+            _onRejected,
+            _isRejection
+          )
+
+          subject.queue(_factory)
+        })
+      })
+
+      describe('when promise is not resolvable', () => {
+        beforeEach(() => {
+          _isRejection = true
+          _onFulfilled = jest.fn()
+        })
+
+        it("calls the promise' rejection handler", $done => {
+          function _onRejected() {
+            expect(_onFulfilled).not.toHaveBeenCalled()
+            $done()
+          }
+
+          const _factory = createPromiseFactory(
+            _onFulfilled,
+            _onRejected,
+            _isRejection
+          )
+
+          subject.queue(_factory)
+        })
+      })
     })
 
     describe('.unqueue(...$factories)', () => {
