@@ -2,15 +2,24 @@ import getRandomIntegerBetween from './getRandomIntegerBetween'
 
 const DELAY_RANGE = Object.freeze([100, 250])
 
-function createPromiseExecutor($isRejection) {
+function createPromiseExecutor($isAsync, $isRejection) {
   return function execute($resolve, $reject) {
-    setTimeout(() => {
+    function _onExecuted() {
       if ($isRejection) {
         $reject()
       } else {
         $resolve()
       }
-    }, getRandomIntegerBetween(...DELAY_RANGE))
+    }
+
+    if ($isAsync) {
+      setTimeout(
+        _onExecuted,
+        getRandomIntegerBetween(...DELAY_RANGE)
+      )
+    } else {
+      _onExecuted()
+    }
   }
 }
 

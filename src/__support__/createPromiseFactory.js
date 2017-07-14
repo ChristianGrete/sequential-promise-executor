@@ -1,8 +1,13 @@
 import createPromiseExecutor from './createPromiseExecutor'
 
-function createPromiseFactory($onFulfilled, $onRejected, $isRejection) {
+function createPromiseFactory(
+  $onFulfilled,
+  $onRejected,
+  $isAsync,
+  $isRejection
+) {
   return function createPromise() {
-    const _executor = createPromiseExecutor($isRejection)
+    const _executor = createPromiseExecutor($isAsync, $isRejection)
     const _promise = new Promise(_executor)
 
     _promise.then(

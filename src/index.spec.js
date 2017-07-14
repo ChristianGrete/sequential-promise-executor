@@ -62,6 +62,7 @@ describe('SequentialPromiseExecutor', () => {
     })
 
     describe('.queue(...$factories)', () => {
+      var _isAsync
       var _isRejection
       var _onFulfilled
       var _onRejected
@@ -72,11 +73,12 @@ describe('SequentialPromiseExecutor', () => {
 
       describe('when promise is resolvable', () => {
         beforeEach(() => {
-          _isRejection = false
           _onRejected = jest.fn()
         })
 
         it("calls the promise' fulfillment handler", $done => {
+          _isAsync = false
+
           function _onFulfilled() {
             expect(_onRejected).not.toHaveBeenCalled()
             $done()
@@ -85,17 +87,20 @@ describe('SequentialPromiseExecutor', () => {
           const _factory = createPromiseFactory(
             _onFulfilled,
             _onRejected,
+            _isAsync,
             _isRejection
           )
 
           subject.queue(_factory)
         })
 
-        it("executes promises sequentially", $done => {
+        it('executes promises sequentially', $done => {
           var _lastCount = 0
 
           const _COUNT = 9
           const _factories = []
+
+          _isAsync = true
 
           function _onFulfilled($count) {
             expect(_lastCount += 1).toBe($count)
@@ -106,10 +111,11 @@ describe('SequentialPromiseExecutor', () => {
             }
           }
 
-          for (let _index = 0; _index < _COUNT; _index ++) {
+          for (let _index = 0; _index < _COUNT; _index++) {
             let _factory = createPromiseFactory(
               () => _onFulfilled(_index + 1),
               _onRejected,
+              _isAsync,
               _isRejection
             )
 
@@ -120,6 +126,22 @@ describe('SequentialPromiseExecutor', () => {
             subject.queue($factory)
           })
         })
+
+        it('accepts factories nested in arrays as arguments', $done => {
+          _isAsync = false
+          _onFulfilled = $done
+
+          const _factory = createPromiseFactory(
+            _onFulfilled,
+            _onRejected,
+            _isAsync,
+            _isRejection
+          )
+
+          const _actual = () => subject.queue([_factory])
+
+          expect(_actual).not.toThrow()
+        })
       })
 
       describe('when promise is not resolvable', () => {
@@ -129,6 +151,8 @@ describe('SequentialPromiseExecutor', () => {
         })
 
         it("calls the promise' rejection handler", $done => {
+          _isAsync = false
+
           function _onRejected() {
             expect(_onFulfilled).not.toHaveBeenCalled()
             $done()
@@ -137,6 +161,7 @@ describe('SequentialPromiseExecutor', () => {
           const _factory = createPromiseFactory(
             _onFulfilled,
             _onRejected,
+            _isAsync,
             _isRejection
           )
 
