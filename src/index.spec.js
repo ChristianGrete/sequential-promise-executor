@@ -1,5 +1,5 @@
 import * as src from '.'
-import { createPromiseFactory } from './__support__'
+import {createPromiseFactory} from './__support__'
 
 const SequentialPromiseExecutor = src.SequentialPromiseExecutor
 const srcHasMember = {}.hasOwnProperty.bind(src)
