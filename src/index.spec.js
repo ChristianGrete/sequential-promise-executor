@@ -1,10 +1,10 @@
 import * as src from '.'
 import {createPromiseFactory} from './__support__'
 
+var subject
+
 const SequentialPromiseExecutor = src.SequentialPromiseExecutor
 const srcHasMember = {}.hasOwnProperty.bind(src)
-
-var subject
 
 describe('SequentialPromiseExecutor', () => {
   describe('when imported', () => {
@@ -66,6 +66,10 @@ describe('SequentialPromiseExecutor', () => {
       var _onFulfilled
       var _onRejected
 
+      it('is chainable', () => {
+        expect(subject.queue()).toBe(subject)
+      })
+
       describe('when promise is resolvable', () => {
         beforeEach(() => {
           _isRejection = false
@@ -85,6 +89,36 @@ describe('SequentialPromiseExecutor', () => {
           )
 
           subject.queue(_factory)
+        })
+
+        it("executes promises sequentially", $done => {
+          var _lastCount = 0
+
+          const _COUNT = 9
+          const _factories = []
+
+          function _onFulfilled($count) {
+            expect(_lastCount += 1).toBe($count)
+
+            if ($count === _COUNT) {
+              expect(_onRejected).not.toHaveBeenCalled()
+              $done()
+            }
+          }
+
+          for (let _index = 0; _index < _COUNT; _index ++) {
+            let _factory = createPromiseFactory(
+              () => _onFulfilled(_index + 1),
+              _onRejected,
+              _isRejection
+            )
+
+            _factories.push(_factory)
+          }
+
+          _factories.forEach($factory => {
+            subject.queue($factory)
+          })
         })
       })
 
