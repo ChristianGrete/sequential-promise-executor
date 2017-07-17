@@ -56,7 +56,7 @@ class SequentialPromiseProcessor {
   }
 
   queue(...$factories) {
-    var _store
+    const _queue = store.get(this).queue
 
     $factories.forEach($factory => {
       if (Array.isArray($factory)) {
@@ -64,13 +64,7 @@ class SequentialPromiseProcessor {
       }
 
       if (typeof $factory === 'function') {
-        _store = store.get(this)
-
-        _store.queue.push($factory)
-
-        if (_store.state !== STATE_PAUSED) {
-          this.process()
-        }
+        _queue.push($factory)
       }
     })
 
@@ -101,7 +95,7 @@ class SequentialPromiseProcessor {
   }
 
   process() {
-    return this.resume()
+    return store.get(this).state === STATE_IDLE ? this.resume() : this
   }
 
   resume() {
