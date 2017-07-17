@@ -6,7 +6,7 @@
   },
   "bugs": {
     "email": "webmaster@christiangrete.com",
-    "url": "https://github.com/ChristianGrete/sequential-promise-executor/issues"
+    "url": "https://github.com/ChristianGrete/sequential-promise-processor/issues"
   },
   "contributors": [
     {
@@ -16,7 +16,7 @@
     }
   ],
   "dependencies": {},
-  "description": "An executor that queues and resolves promises in series",
+  "description": "A processor that queues and resolves promises in series",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
@@ -38,7 +38,7 @@
     "webpack": "^3.2.0"
   },
   "files": [],
-  "homepage": "https://github.com/ChristianGrete/sequential-promise-executor",
+  "homepage": "https://github.com/ChristianGrete/sequential-promise-processor",
   "keywords": [],
   "license": "MIT",
   "main": "dist/index.js",
@@ -49,11 +49,11 @@
       "url": "https://christiangrete.com"
     }
   ],
-  "name": "@christiangrete/sequential-promise-executor",
+  "name": "@com.christiangrete.libs.js/sequential-promise-processor",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/ChristianGrete/sequential-promise-executor.git"
+    "url": "git://github.com/ChristianGrete/sequential-promise-processor.git"
   },
   "scripts": {
     "build": "webpack -p",

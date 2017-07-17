@@ -1,8 +1,8 @@
-# [sequential-promise-executor][github-url]
+# [sequential-promise-processor][github-url]
 
 [![Latest GitHub Tag][shield-github-tag]][github-tags-url]
 
-> An executor that queues and resolves promises in series
+> A processor that queues and resolves promises in series
 
 ## Getting started
 
@@ -10,11 +10,11 @@
 
 To install this package to your [Node.js](https://nodejs.org) modules, simply run:
 ```sh
-npm i -S @christiangrete/sequential-promise-executor
+npm i -S @com.christiangrete.libs.js/sequential-promise-processor
 ```
 Or, using [Yarn](https://yarnpkg.com), run:
 ```sh
-yarn add @christiangrete/sequential-promise-executor
+yarn add @com.christiangrete.libs.js/sequential-promise-processor
 ```
 
 ## Policy
@@ -32,9 +32,9 @@ Copyright © 2017 [Christian Grete](https://christiangrete.com)
 - [LinkedIn](https://www.linkedin.com/in/ChristianGrete)
 - [XING](https://www.xing.com/profile/Christian_Grete2)
 
-[github-tags-url]: https://github.com/ChristianGrete/sequential-promise-executor/tags
-[github-url]: https://github.com/ChristianGrete/sequential-promise-executor
-[npm-badge]: https://nodei.co/npm/sequential-promise-executor
-[package-quality-url]: http://packagequality.com/#?package=sequential-promise-executor
-[shield-github-tag]: https://img.shields.io/github/tag/ChristianGrete/sequential-promise-executor.svg
-[shield-package-quality]: http://npm.packagequality.com/shield/sequential-promise-executor.svg
+[github-tags-url]: https://github.com/ChristianGrete/sequential-promise-processor/tags
+[github-url]: https://github.com/ChristianGrete/sequential-promise-processor
+[npm-badge]: https://nodei.co/npm/sequential-promise-processor
+[package-quality-url]: http://packagequality.com/#?package=sequential-promise-processor
+[shield-github-tag]: https://img.shields.io/github/tag/ChristianGrete/sequential-promise-processor.svg
+[shield-package-quality]: http://npm.packagequality.com/shield/sequential-promise-processor.svg

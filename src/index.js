@@ -39,7 +39,7 @@ function onRejected() {
   }
 }
 
-class SequentialPromiseExecutor {
+class SequentialPromiseProcessor {
   constructor(...$factories) {
     store.set(this, Object.create(null, {
       'queue': {
@@ -134,6 +134,6 @@ class SequentialPromiseExecutor {
 }
 
 export {
-  SequentialPromiseExecutor,
-  SequentialPromiseExecutor as default
+  SequentialPromiseProcessor,
+  SequentialPromiseProcessor as default
 }

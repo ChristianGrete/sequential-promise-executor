@@ -3,22 +3,22 @@ import {createPromiseFactory} from './__support__'
 
 var subject
 
-const SequentialPromiseExecutor = src.SequentialPromiseExecutor
+const SequentialPromiseProcessor = src.SequentialPromiseProcessor
 const srcHasMember = {}.hasOwnProperty.bind(src)
 
-describe('SequentialPromiseExecutor', () => {
+describe('SequentialPromiseProcessor', () => {
   describe('when imported', () => {
     it('is available as default member', () => {
       expect(srcHasMember('default')).toBe(true)
     })
 
     it('is also available as named member', () => {
-      expect(srcHasMember('SequentialPromiseExecutor')).toBe(true)
+      expect(srcHasMember('SequentialPromiseProcessor')).toBe(true)
     })
   })
 
   describe('.constructor(...$factories)', () => {
-    const _prototype = SequentialPromiseExecutor.prototype
+    const _prototype = SequentialPromiseProcessor.prototype
     const _originalQueueMethod = _prototype.queue
 
     beforeEach(() => {
@@ -27,7 +27,7 @@ describe('SequentialPromiseExecutor', () => {
 
     describe('when invoked with arguments', () => {
       beforeEach(() => {
-        subject = new SequentialPromiseExecutor(
+        subject = new SequentialPromiseProcessor(
           () => {},
           () => {}
         )
@@ -43,7 +43,7 @@ describe('SequentialPromiseExecutor', () => {
 
     describe('when invoked without arguments', () => {
       beforeEach(() => {
-        subject = new SequentialPromiseExecutor()
+        subject = new SequentialPromiseProcessor()
       })
 
       it('does not call .queue(...$factories)', () => {
@@ -58,7 +58,7 @@ describe('SequentialPromiseExecutor', () => {
 
   describe('when instantiated', () => {
     beforeEach(() => {
-      subject = new SequentialPromiseExecutor()
+      subject = new SequentialPromiseProcessor()
     })
 
     describe('.queue(...$factories)', () => {
