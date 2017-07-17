@@ -57,28 +57,26 @@ describe('SequentialPromiseProcessor', () => {
   })
 
   describe('when instantiated', () => {
+    var _isAsync
+    var _isRejection
+    var _onFulfilled
+    var _onRejected
+
     beforeEach(() => {
+      _isAsync = false
+      _isRejection = false
+      _onFulfilled = jest.fn()
+      _onRejected = jest.fn()
       subject = new SequentialPromiseProcessor()
     })
 
     describe('.queue(...$factories)', () => {
-      var _isAsync
-      var _isRejection
-      var _onFulfilled
-      var _onRejected
-
       it('is chainable', () => {
         expect(subject.queue()).toBe(subject)
       })
 
       describe('when promise is resolvable', () => {
-        beforeEach(() => {
-          _onRejected = jest.fn()
-        })
-
         it("calls the promise' fulfillment handler", $done => {
-          _isAsync = false
-
           function _onFulfilled() {
             expect(_onRejected).not.toHaveBeenCalled()
             $done()
@@ -91,7 +89,9 @@ describe('SequentialPromiseProcessor', () => {
             _isRejection
           )
 
-          subject.queue(_factory)
+          subject
+            .queue(_factory)
+            .process()
         })
 
         it('executes promises sequentially', $done => {
@@ -125,10 +125,11 @@ describe('SequentialPromiseProcessor', () => {
           _factories.forEach($factory => {
             subject.queue($factory)
           })
+
+          subject.process()
         })
 
         it('accepts factories nested in arrays as arguments', $done => {
-          _isAsync = false
           _onFulfilled = $done
 
           const _factory = createPromiseFactory(
@@ -141,18 +142,17 @@ describe('SequentialPromiseProcessor', () => {
           const _actual = () => subject.queue([_factory])
 
           expect(_actual).not.toThrow()
+
+          subject.process()
         })
       })
 
       describe('when promise is not resolvable', () => {
         beforeEach(() => {
           _isRejection = true
-          _onFulfilled = jest.fn()
         })
 
         it("calls the promise' rejection handler", $done => {
-          _isAsync = false
-
           function _onRejected() {
             expect(_onFulfilled).not.toHaveBeenCalled()
             $done()
@@ -165,35 +165,82 @@ describe('SequentialPromiseProcessor', () => {
             _isRejection
           )
 
-          subject.queue(_factory)
+          subject
+            .queue(_factory)
+            .process()
         })
       })
     })
 
     describe('.unqueue(...$factories)', () => {
-      // TODO
+      it('is chainable', () => {
+        expect(subject.unqueue()).toBe(subject)
+      })
     })
 
     describe('.process()', () => {
-      beforeEach(() => {
-        subject.resume = jest.fn()
-        subject.process()
+      it('is chainable', () => {
+        expect(subject.process()).toBe(subject)
       })
 
-      it('calls .resume()', () => {
-        expect(subject.resume).toHaveBeenCalled()
+      describe('when idle', () => {
+        beforeEach(() => {
+          subject.resume = jest.fn()
+          subject.process()
+        })
+
+        it('calls .resume()', () => {
+          expect(subject.resume).toHaveBeenCalled()
+        })
+      })
+
+      describe('when not idle', () => {
+        beforeEach(() => {
+          _isAsync = true
+
+          const _factory = createPromiseFactory(
+            _onFulfilled,
+            _onRejected,
+            _isAsync,
+            _isRejection
+          )
+
+          subject
+            .queue(_factory)
+            .process()
+
+          subject.resume = jest.fn()
+
+          subject.process()
+        })
+
+        it('does nothing', () => {
+          expect(subject.resume).not.toHaveBeenCalled()
+        })
       })
     })
 
     describe('.resume()', () => {
+      it('is chainable', () => {
+        expect(subject.resume()).toBe(subject)
+      })
+
       // TODO
     })
 
     describe('.pause()', () => {
+      it('is chainable', () => {
+        expect(subject.pause()).toBe(subject)
+      })
+
       // TODO
     })
 
     describe('.cancel()', () => {
+      it('is chainable', () => {
+        expect(subject.cancel()).toBe(subject)
+      })
+
       // TODO
     })
   })
