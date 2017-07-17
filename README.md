@@ -19,7 +19,46 @@ yarn add @com.christiangrete.libs.js/sequential-promise-processor
 
 ### Usage
 ```js
+import {exec} from 'child_process'
 import Processor from '@com.christiangrete.libs.js/sequential-promise-processor'
+
+function createPromiseExecutor($command) {
+  return function execute($resolve, $reject) {
+    exec($command, ($error, $stdout, $stderr) => {
+      if ($error === null) {
+        $resolve(null, $stdout)
+      } else {
+        $reject($error, $stderr)
+      }
+    })
+  }
+}
+
+function createPromiseFactory($command, $callback) {
+  return function createPromise() {
+    const _executor = createPromiseExecutor($command)
+    const _promise = new Promise(_executor)
+
+    if (typeof $callback === 'function') {
+      _promise.then($callback, $callback)
+    }
+
+    return _promise
+  }
+}
+
+const commands = [
+  createPromiseFactory('git add --all'),
+  createPromiseFactory("git commit -m 'added stuff'"),
+  createPromiseFactory('git pull origin develop'),
+  createPromiseFactory('git push origin develop', $error => throw $error)
+]
+
+const processor = new Processor()
+
+processor.queue(commands)
+
+processor.process()
 ```
 
 ## Policy
