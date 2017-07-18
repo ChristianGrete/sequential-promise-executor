@@ -4,21 +4,32 @@ const STATE_PAUSED = 0
 
 const store = new Map()
 
+const isPromise = $value => {
+  const _type = typeof $value
+
+  return $value !== null && (_type === 'object' || _type === 'function') &&
+    typeof $value.then === 'function'
+}
+
 function step() {
   if (this.state === STATE_BUSY) {
-    const _factory = this.queue[0]
+    const _promise = this.queue[0]()
 
-    if (typeof _factory === 'function') {
-      const _promise = _factory()
+    this.queue.shift()
 
-      this.queue.shift()
-
-      if (_promise !== null && typeof _promise === 'object') {
+    if (isPromise(_promise)) {
+      try {
         _promise.then(
           onFulfilled.bind(this),
           onRejected.bind(this)
         )
+      } catch ($error) {
+        this.error = $error
+        onRejected.call(this)
       }
+    } else {
+      this.error = new TypeError()
+      onRejected.call(this)
     }
   }
 }
@@ -37,11 +48,23 @@ function onRejected() {
   if (this.state === STATE_BUSY) {
     this.state = STATE_IDLE
   }
+
+  if (this.error !== null) {
+    let _error = this.error
+
+    this.error = null
+
+    throw _error
+  }
 }
 
 class SequentialPromiseProcessor {
   constructor(...$factories) {
     store.set(this, Object.create(null, {
+      'error': {
+        'value': null,
+        'writable': true
+      },
       'queue': {
         'value': [],
         'writable': true
