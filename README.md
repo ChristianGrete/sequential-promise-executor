@@ -64,8 +64,8 @@ const commands = [
   'git push origin develop'
 ]
 
-// A list of factory functions bound to the corresponding command from the list
-// above
+// A list of factory functions referenced with the corresponding command from
+// the list above
 const factories = commands.map($command => createFactory(
   $command,
   (...$arguments) => console.log(...$arguments)
