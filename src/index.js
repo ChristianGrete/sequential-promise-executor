@@ -13,9 +13,15 @@ const isPromise = $value => {
 
 function step() {
   if (this.state === STATE_BUSY) {
-    const _promise = this.queue[0]()
+    const _queuer = this.queue[0]
 
-    this.queue.shift()
+    if (_queuer.calls > 0) {
+      return
+    }
+
+    const _promise = _queuer.factory()
+
+    _queuer.calls ++
 
     if (isPromise(_promise)) {
       try {
@@ -35,6 +41,8 @@ function step() {
 }
 
 function onFulfilled() {
+  this.queue.shift()
+
   if (this.queue.length > 0) {
     step.call(this)
   } else if (this.state === STATE_BUSY) {
@@ -50,7 +58,7 @@ function onRejected() {
   }
 
   if (this.error !== null) {
-    let _error = this.error
+    const _error = this.error
 
     this.error = null
 
@@ -61,17 +69,17 @@ function onRejected() {
 class SequentialPromiseProcessor {
   constructor(...$factories) {
     store.set(this, Object.create(null, {
-      'error': {
-        'value': null,
-        'writable': true
+      error: {
+        value: null,
+        writable: true
       },
-      'queue': {
-        'value': [],
-        'writable': true
+      queue: {
+        value: [],
+        writable: true
       },
-      'state': {
-        'value': STATE_IDLE,
-        'writable': true
+      state: {
+        value: STATE_IDLE,
+        writable: true
       }
     }))
 
@@ -87,7 +95,17 @@ class SequentialPromiseProcessor {
       }
 
       if (typeof $factory === 'function') {
-        _queue.push($factory)
+        const _queuer = Object.create(null, {
+          calls: {
+            value: 0,
+            writable: true
+          },
+          factory: {
+            value: $factory
+          }
+        })
+
+        _queue.push(_queuer)
       }
     })
 
@@ -104,11 +122,12 @@ class SequentialPromiseProcessor {
         this.pause()
 
         const _queue = store.get(this).queue
-        const _index = _queue.indexOf($factory)
 
-        if (_index > -1) {
-          _queue.splice(_index, 1)
-        }
+        _queue.filter(($queuer, $index) => {
+          if ($queuer.factory === $factory) {
+            _queue.splice($index, 1)
+          }
+        })
 
         this.resume()
       }
