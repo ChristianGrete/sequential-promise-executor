@@ -19,11 +19,11 @@ yarn add @com.christiangrete.libs.js/sequential-promise-processor
 
 ### Usage
 ```js
-import {exec} from 'child_process'
-
 import {
   SequentialPromiseProcessor
 } from '@com.christiangrete.libs.js/sequential-promise-processor'
+
+import {exec} from 'child_process'
 
 const createExecutor = $command => ($resolve, $reject) => {
   exec($command, ($error, $stdout, $stderr) => {
