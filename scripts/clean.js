@@ -22,7 +22,7 @@ if (hasArgument('--all') || hasArgument('--dependencies')) {
   )
 }
 
-if (hasArgument('--all')) {
+if (hasArgument('--artifact') || hasArgument('--all')) {
   entries.push('dist/')
 }
 
