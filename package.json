@@ -59,6 +59,7 @@
     "build": "webpack -p",
     "clean": "babel-node scripts/clean.js",
     "lint": "eslint webpack.config.babel.js scripts/ src/",
+    "release": "babel-node scripts/release.js",
     "start": "webpack --watch",
     "test": "jest"
   },
