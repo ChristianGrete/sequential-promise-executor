@@ -17,7 +17,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "jest"
+    "jest",
+    "promise"
   ],
   "root": true,
   "rules": {
@@ -48,6 +49,7 @@
         "avoidExplicitReturnArrows": true
       }
     ],
+    "promise/param-names": "off",
     "space-before-function-paren": [
       "warn",
       {
