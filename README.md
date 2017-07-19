@@ -18,6 +18,8 @@ yarn add @com.christiangrete.libs.js/sequential-promise-processor
 ```
 
 ### Usage
+
+Let’s assume that we want to execute `git` commands in a series:
 ```js
 import {
   SequentialPromiseProcessor
@@ -25,6 +27,8 @@ import {
 
 import {exec} from 'child_process'
 
+// A factory function that returns another function that will be passed to the
+// Promise constructor as its executor function with the corresponding command
 const createExecutor = $command => ($resolve, $reject) => {
   exec($command, ($error, $stdout, $stderr) => {
     if ($error === null) {
@@ -35,6 +39,8 @@ const createExecutor = $command => ($resolve, $reject) => {
   })
 }
 
+// Another factory function that returns a new Promise object created with the
+// corresponding command and the executor function from the factory above
 const createFactory = ($command, $callback) => () => {
   const _executor = createExecutor($command)
   const _promise = new Promise(_executor)
@@ -49,6 +55,7 @@ const createFactory = ($command, $callback) => () => {
   return _promise
 }
 
+// A list of commands that will be executed in series
 const commands = [
   'git add --all',
   'git status',
@@ -57,6 +64,8 @@ const commands = [
   'git push origin develop'
 ]
 
+// A list of factory functions bound to the corresponding command from the list
+// above
 const factories = commands.map($command => createFactory(
   $command,
   (...$arguments) => console.log(...$arguments)
@@ -64,18 +73,29 @@ const factories = commands.map($command => createFactory(
 
 const sequentialPromiseProcessor = new SequentialPromiseProcessor()
 
-sequentialPromiseProcessor.queue(factories)
+// This method adds all factory functions to the queue...
+sequentialPromiseProcessor.queue(factories) // Queues the factories from above
+// ...it could also be used as follows:
+// sequentialPromiseProcessor.queue(...factories)
+// ...or...
+// sequentialPromiseProcessor.queue(factories[0]).queue(factories[1])
 
+// Start processing the queue needs to be done manually.
 sequentialPromiseProcessor.process()
 
+// It is possible to remove a factory from the queue, unless it has already
+// been processed.
 sequentialPromiseProcessor.unqueue(factories[1])
 
+// It is also possible to pause the processing of the queue...
 sequentialPromiseProcessor.pause()
 
+// ...and to resume it later on...
 setTimeout(() => {
   sequentialPromiseProcessor.resume()
 }, 500)
 
+// ...or completely abort the process.
 sequentialPromiseProcessor.cancel()
 ```
 
