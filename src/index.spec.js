@@ -111,7 +111,7 @@ describe('SequentialPromiseProcessor', () => {
             }
           }
 
-          for (let _index = 0; _index < _COUNT; _index++) {
+          for (let _index = 0; _index < _COUNT; _index ++) {
             let _factory = createPromiseFactory(
               () => _onFulfilled(_index + 1),
               _onRejected,
