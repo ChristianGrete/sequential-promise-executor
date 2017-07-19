@@ -27,7 +27,7 @@ import {
 
 import {exec} from 'child_process'
 
-// A factory function that returns another function that will be passed to the
+// A factory function that returns another function which will be passed to the
 // Promise constructor as its executor function with the corresponding command
 const createExecutor = $command => ($resolve, $reject) => {
   exec($command, ($error, $stdout, $stderr) => {
