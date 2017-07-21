@@ -14,7 +14,7 @@ const entries = [
   'coverage/'
 ]
 
-if (hasArgument('--all') || hasArgument('--dependencies')) {
+if (hasArgument('all') || hasArgument('dependencies')) {
   entries.push(
     'node_modules/',
     'package-lock.json',
@@ -22,7 +22,7 @@ if (hasArgument('--all') || hasArgument('--dependencies')) {
   )
 }
 
-if (hasArgument('--artifact') || hasArgument('--all')) {
+if (hasArgument('artifact') || hasArgument('all')) {
   entries.push('dist/')
 }
 
