@@ -1,5 +1,5 @@
 import SequentialPromiseProcessor from '../src/'
-import {build, bump, clean, publish} from '../tasks/release/'
+import {build, bump, clean, prepublish, publish} from '../tasks/release/'
 
 var version = 'patch'
 
@@ -29,7 +29,7 @@ const TASKS = Object.freeze([
   // TODO: git.forcePush(),
   // TODO: git.tag(`v${version}`, 'Lorem ipsum dolor'),
   // TODO: git.pushTags(),
-  // TODO: optimizeManifests(),
+  // prepublish(),
   // publish(),
   // TODO: git.hardReset(currentCommitHash),
   clean('artifact')
