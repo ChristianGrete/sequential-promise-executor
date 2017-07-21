@@ -1,5 +1,5 @@
 import SequentialPromiseProcessor from '../src/'
-import {build, bump, clean} from '../tasks/release/'
+import {build, bump, clean, publish} from '../tasks/release/'
 
 var version = 'patch'
 
@@ -15,29 +15,26 @@ ARGUMENTS.every($argument => {
 })
 
 const TASKS = Object.freeze([
-  clean(),
-  bump(version),
-  // TODO ...
-  // git.add('--all'),
-  // git.commit(`bump(version): ${version} [ci skip]`),
-  // git.push(),
-  // git.checkout('master'),
-  // git.merge('develop'),
-  // currentCommitHash = git.revParse('--verify HEAD'),
-  build(),
-  // TODO ...
-  // git.add('--all'),
-  // git.commit(`release(artifact): ${version} [ci skip]`),
-  // git.forcePush(),
-  // git.tag(`v${version}`, 'Lorem ipsum dolor'),
-  // git.pushTags(),
-  // optimizeManifests(),
+  // clean(),
+  // bump(version),
+  // TODO: git.add('--all'),
+  // TODO: git.commit(`bump(version): ${version} [ci skip]`),
+  // TODO: git.push(),
+  // TODO: git.checkout('master'),
+  // TODO: git.merge('develop'),
+  // TODO: currentCommitHash = git.revParse('--verify HEAD'),
+  // build(),
+  // TODO: git.add('--all'),
+  // TODO: git.commit(`release(artifact): ${version} [ci skip]`),
+  // TODO: git.forcePush(),
+  // TODO: git.tag(`v${version}`, 'Lorem ipsum dolor'),
+  // TODO: git.pushTags(),
+  // TODO: optimizeManifests(),
   // publish(),
-  // git.hardReset(currentCommitHash),
-  clean('--artifact')
-  // TODO ...
-  // git.forcePush(),
-  // git.checkout('develop')
+  // TODO: git.hardReset(currentCommitHash),
+  clean('artifact')
+  // TODO: git.forcePush(),
+  // TODO: git.checkout('develop')
 ])
 
 ;(new SequentialPromiseProcessor(TASKS)).process()
