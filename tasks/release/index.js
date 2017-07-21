@@ -1,15 +1,15 @@
 import build from './build'
 import bump from './bump'
 import clean from './clean'
-import getCommit from './getCommit'
-import prepublish from './prepublish'
-import publish from './publish'
+import finish from './finish'
+import release from './release'
+import undo from './undo'
 
 export {
   build,
   bump,
   clean,
-  getCommit,
-  prepublish,
-  publish
+  finish,
+  release,
+  undo
 }

@@ -1,14 +1,15 @@
-import {exec} from 'child_process'
+// git checkout master
+// git merge develop
+// git rev-parse --verify HEAD
+// webpack -p
+// git add --all
+// git commit -m "build(dist): v$npm_package_version [ci skip]"
+// git push --force origin master
 
-function build() {
+function build($setCommit) {
   return () => new Promise(($resolve, $reject) => {
-    exec('webpack -p', $error => {
-      if ($error === null) {
-        $resolve()
-      } else {
-        $reject($error)
-      }
-    })
+    $setCommit('0123456789')
+    $resolve()
   })
 }
 
