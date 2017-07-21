@@ -58,11 +58,11 @@
   "scripts": {
     "clean": "babel-node scripts/clean.js",
     "lint": "eslint webpack.config.babel.js scripts/ src/ tasks/",
-    "postversion": "babel-node scripts/postversion.js",
+    "postversion": "echo 'babel-node scripts/postversion.js'",
     "preversion": "npm run clean -- artifact",
     "release": "babel-node scripts/release.js",
     "test": "jest",
-    "version": "git add --all"
+    "version": "echo 'git add --all'"
   },
   "version": "0.0.0"
 }
