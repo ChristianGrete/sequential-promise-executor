@@ -1,15 +1,16 @@
 import SequentialPromiseProcessor from '../src/'
 import * as tasks from '../tasks/release/'
 
+var commit
+var version
+
 const TASKS = Object.freeze([
-  tasks.clean(),
-  tasks.bump(),
-  // TODO: git.add('--all'),
-  // TODO: git.commit(`bump(version): ${version} [ci skip]`),
-  // TODO: git.push(),
-  // TODO: git.checkout('master'),
-  // TODO: git.merge('develop'),
-  // TODO: currentCommitHash = git.revParse('--verify HEAD'),
+  // tasks.bump($version => {
+  //   version = $version
+  // }),
+  tasks.getCommit($commit => {
+    commit = $commit
+  }),
   tasks.build(),
   // TODO: git.add('--all'),
   // TODO: git.commit(`release(artifact): ${version} [ci skip]`),
