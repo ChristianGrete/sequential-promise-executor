@@ -57,12 +57,9 @@
   },
   "scripts": {
     "clean": "babel-node scripts/clean.js",
+    "distribute": "babel-node scripts/distribute.js",
     "lint": "eslint webpack.config.babel.js scripts/ src/ tasks/",
-    "postversion": "babel-node scripts/postversion.js",
-    "preversion": "npm run clean -- artifact",
-    "release": "babel-node scripts/release.js",
-    "test": "jest",
-    "version": "git add --all"
+    "test": "jest"
   },
   "version": "0.0.0"
 }
