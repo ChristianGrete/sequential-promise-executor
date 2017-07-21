@@ -30,12 +30,10 @@ function step() {
           onRejected.bind(this)
         )
       } catch ($error) {
-        this.error = $error
-        onRejected.call(this)
+        onRejected.call(this, $error)
       }
     } else {
-      this.error = new TypeError()
-      onRejected.call(this)
+      onRejected.call(this, new TypeError())
     }
   }
 }
@@ -50,29 +48,21 @@ function onFulfilled() {
   }
 }
 
-function onRejected() {
+function onRejected($reason) {
   this.queue = []
 
   if (this.state === STATE_BUSY) {
     this.state = STATE_IDLE
   }
 
-  if (this.error !== null) {
-    const _error = this.error
-
-    this.error = null
-
-    throw _error
+  if ($reason != null) {
+    console.error($reason) // eslint-disable-line no-console
   }
 }
 
 class SequentialPromiseProcessor {
   constructor(...$factories) {
     store.set(this, Object.create(null, {
-      error: {
-        value: null,
-        writable: true
-      },
       queue: {
         value: [],
         writable: true
