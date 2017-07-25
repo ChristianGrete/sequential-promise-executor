@@ -1,0 +1,7 @@
+{
+  "destination": "docs/",
+  "includes": [
+    "index\\.js"
+  ],
+  "source": "src/"
+}
