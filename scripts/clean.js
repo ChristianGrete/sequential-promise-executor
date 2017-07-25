@@ -11,7 +11,8 @@ function hasArgument($argument) {
 
 const entries = [
   'build/',
-  'coverage/'
+  'coverage/',
+  'docs/'
 ]
 
 if (hasArgument('all') || hasArgument('dependencies')) {
