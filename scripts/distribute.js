@@ -15,7 +15,7 @@ const TASKS = Object.freeze([
   release(() => version),
   undo(() => commit),
   clean('distribution'),
-  finish()
+  finish(() => version)
 ])
 
 ;(new SequentialPromiseProcessor(TASKS)).process()
