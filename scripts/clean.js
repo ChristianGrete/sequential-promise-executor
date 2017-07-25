@@ -22,7 +22,7 @@ if (hasArgument('all') || hasArgument('dependencies')) {
   )
 }
 
-if (hasArgument('artifact') || hasArgument('all')) {
+if (hasArgument('all') || hasArgument('distribution')) {
   entries.push('dist/')
 }
 
