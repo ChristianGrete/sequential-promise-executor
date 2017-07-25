@@ -19,7 +19,7 @@ process.argv.slice(2).every($argument => {
   }
 })
 
-const editFile = ($resolve, $reject) => () => {
+const editManifestFile = ($resolve, $reject) => () => {
   readFile(MANIFEST_FILE, 'utf8', ($error, $json) => {
     var _json
     var _package
@@ -41,7 +41,7 @@ const editFile = ($resolve, $reject) => () => {
 
       _json = JSON.stringify(_package, null, 2)
 
-      writeFile(`${MANIFEST_FILE}-output.json`, _json, 'utf8', $error => {
+      writeFile(MANIFEST_FILE, _json, 'utf8', $error => {
         if ($error === null) {
           $resolve()
         } else {
@@ -54,10 +54,10 @@ const editFile = ($resolve, $reject) => () => {
   })
 }
 
-const run = ($reject, $command, $resolve) => () => {
-  exec($command, ($error, $stdout) => {
+const run = ($reject, $command, $resolve) => {
+  exec($command, $error => {
     if ($error === null) {
-      $resolve($stdout)
+      $resolve()
     } else {
       $reject($error)
     }
@@ -66,18 +66,18 @@ const run = ($reject, $command, $resolve) => () => {
 
 function release($getVersion) {
   return () => new Promise(($resolve, $reject) => {
+    const _VERSION = $getVersion()
+
+    const _run = run.bind(this, $reject)
+
     try {
-      const _VERSION = $getVersion()
-
-      const _run = run.bind(this, $reject)
-
       _run(
-        `echo "git tag -a 'v${_VERSION}' -m '${message}' && git push --tags"`,
-        editFile(
-          _run('echo "npm publish --access public"', $resolve),
+        `git tag -a 'v${_VERSION}' -m '${message}' && git push --tags`,
+        editManifestFile(
+          () => _run('npm publish --access public', $resolve),
           $reject
         )
-      )()
+      )
     } catch ($error) {
       $reject($error)
     }

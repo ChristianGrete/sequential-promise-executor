@@ -12,35 +12,36 @@ process.argv.slice(2).every($argument => {
 })
 
 const run = ($reject, $command, $resolve) => {
-  try {
-    exec($command, ($error, $stdout) => {
-      if ($error === null) {
-        $resolve($stdout)
-      } else {
-        $reject($error)
-      }
-    })
-  } catch ($error) {
-    $reject($error)
-  }
+  exec($command, ($error, $stdout) => {
+    if ($error === null) {
+      $resolve($stdout)
+    } else {
+      $reject($error)
+    }
+  })
 }
 
 function bump($setVersion) {
   return () => new Promise(($resolve, $reject) => {
     const _run = run.bind(this, $reject)
 
-    _run(`echo "npm version --no-git-tag-version ${version}"`, $stdout => {
-      $stdout = '0.0.0'
+    try {
+      _run(`npm version --no-git-tag-version ${version}`, $stdout => {
+        const _VERSION = $stdout.replace(/(?:^v|\r\n|\r|\n)/g, '')
 
-      const _VERSION = $stdout.replace(/(?:^v|\r\n|\r|\n)/g, '')
+        $setVersion(_VERSION)
 
-      $setVersion(_VERSION)
+        const _COMMAND = [
+          'git add --all',
+          `git commit -m 'bump(version): ${_VERSION} [ci skip]'`,
+          'git push origin develop'
+        ].join(' && ')
 
-      _run('echo "git add --all"', () => _run(
-        `echo "git commit -m 'bump(version): ${_VERSION} [ci skip]'"`,
-        () => _run('echo "git push origin develop"', $resolve)
-      ))
-    })
+        _run(_COMMAND, $resolve)
+      })
+    } catch ($error) {
+      $reject($error)
+    }
   })
 }
 

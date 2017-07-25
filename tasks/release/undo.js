@@ -5,7 +5,7 @@ function undo($getCommit) {
     const _COMMIT = $getCommit()
 
     try {
-      exec(`echo "git reset --hard ${_COMMIT}"`, $error => {
+      exec(`git reset --hard ${_COMMIT}`, $error => {
         if ($error === null) {
           $resolve()
         } else {
