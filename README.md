@@ -1,6 +1,9 @@
 # [sequential-promise-processor][github-url]
 
+[![Travis CI][shield-travis-ci]][travis-ci-url]
 [![Latest GitHub Tag][shield-github-tag]][github-tags-url]
+[![Node.js Module Version][shield-npm-version]][npm-url]
+[![Downloads via npm per Month][shield-npm-downloads]][npm-url]
 
 > A processor that queues and resolves promises in series
 
@@ -116,7 +119,9 @@ Copyright © 2017 [Christian Grete](https://christiangrete.com)
 
 [github-tags-url]: https://github.com/ChristianGrete/sequential-promise-processor/tags
 [github-url]: https://github.com/ChristianGrete/sequential-promise-processor
-[npm-badge]: https://nodei.co/npm/sequential-promise-processor
-[package-quality-url]: http://packagequality.com/#?package=sequential-promise-processor
+[npm-url]: https://www.npmjs.com/package/@com.christiangrete.libs.js/sequential-promise-processor
 [shield-github-tag]: https://img.shields.io/github/tag/ChristianGrete/sequential-promise-processor.svg
-[shield-package-quality]: http://npm.packagequality.com/shield/sequential-promise-processor.svg
+[shield-npm-downloads]: https://img.shields.io/npm/dm/@com.christiangrete.libs.js/sequential-promise-processor.svg
+[shield-npm-version]: https://img.shields.io/npm/v/@com.christiangrete.libs.js/sequential-promise-processor.svg
+[shield-travis-ci]: https://img.shields.io/travis/ChristianGrete/sequential-promise-processor.svg
+[travis-ci-url]: https://travis-ci.org/ChristianGrete/sequential-promise-processor
