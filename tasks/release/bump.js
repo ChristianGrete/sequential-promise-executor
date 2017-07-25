@@ -29,18 +29,17 @@ function bump($setVersion) {
   return () => new Promise(($resolve, $reject) => {
     const _run = run.bind(this, $reject)
 
-    _run(`npm version --no-git-tag-version ${version}`, $stdout => {
+    _run(`echo "npm version --no-git-tag-version ${version}"`, $stdout => {
+      $stdout = '0.0.0'
+
       const _VERSION = $stdout.replace(/(?:^v|\r\n|\r|\n)/g, '')
 
       $setVersion(_VERSION)
 
-      _run(
-        'git add --all',
-        () => _run(
-          `git commit -m 'bump(version): ${_VERSION} [ci skip]'`,
-          () => _run('git push origin develop', $resolve)
-        )
-      )
+      _run('echo "git add --all"', () => _run(
+        `echo "git commit -m 'bump(version): ${_VERSION} [ci skip]'"`,
+        () => _run('echo "git push origin develop"', $resolve)
+      ))
     })
   })
 }
