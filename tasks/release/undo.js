@@ -1,9 +1,20 @@
-// git reset --hard ${commit}
+import {exec} from 'child_process'
 
 function undo($getCommit) {
   return () => new Promise(($resolve, $reject) => {
-    console.log($getCommit())
-    $resolve()
+    const _COMMIT = $getCommit()
+
+    try {
+      exec(`echo "git reset --hard ${_COMMIT}"`, $error => {
+        if ($error === null) {
+          $resolve()
+        } else {
+          $reject($error)
+        }
+      })
+    } catch ($error) {
+      $reject($error)
+    }
   })
 }
 
