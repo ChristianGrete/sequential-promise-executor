@@ -1,5 +1,5 @@
 import SequentialPromiseProcessor from '../src'
-import {build, bump, clean, finish, release, undo} from '../tasks/release'
+import {build, bump, clean, finish, release, undo} from '../tasks/distribute'
 
 var commit
 var version
