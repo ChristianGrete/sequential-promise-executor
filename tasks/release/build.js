@@ -1,15 +1,38 @@
-// git checkout master
-// git merge develop
-// git rev-parse --verify HEAD
-// webpack -p
-// git add --all
-// git commit -m "build(dist): v$npm_package_version [ci skip]"
-// git push --force origin master
+import {exec} from 'child_process'
 
-function build($setCommit) {
+const run = ($reject, $command, $resolve) => {
+  try {
+    exec($command, ($error, $stdout) => {
+      if ($error === null) {
+        $resolve($stdout)
+      } else {
+        $reject($error)
+      }
+    })
+  } catch ($error) {
+    $reject($error)
+  }
+}
+
+function build($getVersion, $setCommit) {
   return () => new Promise(($resolve, $reject) => {
-    $setCommit('0123456789')
-    $resolve()
+    const _VERSION = $getVersion()
+
+    const _run = run.bind(this, $reject)
+
+    _run('echo "git checkout master"', () => _run(
+      'echo "git merge develop"',
+      () => _run('git rev-parse --verify HEAD', $stdout => {
+        const _COMMIT = $stdout.replace(/(?:\r\n|\r|\n)/g, '')
+
+        $setCommit(_COMMIT)
+
+        _run('webpack -p', () => _run('echo "git add --all"', () => _run(
+          `echo "git commit -m 'build(dist): v${_VERSION} [ci skip]'"`,
+          () => _run('echo "git push --force origin master"', $resolve)
+        )))
+      })
+    ))
   })
 }
 
