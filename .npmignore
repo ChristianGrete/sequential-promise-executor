@@ -18,6 +18,7 @@ $RECYCLE.BIN/
 build/
 coverage/
 Desktop.ini
+docs/
 ehthumbs.db
 ehthumbs_vista.db
 node_modules/
