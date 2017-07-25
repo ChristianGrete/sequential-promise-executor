@@ -7,29 +7,33 @@ function clean(...$arguments) {
   return () => new Promise(($resolve, $reject) => {
     let _hadCallback = false
 
-    fork(CLEAN_SCRIPT, $arguments)
-      .on('error', $error => {
-        if (_hadCallback) {
-          return
-        }
+    try {
+      fork(CLEAN_SCRIPT, $arguments)
+        .on('error', $error => {
+          if (_hadCallback) {
+            return
+          }
 
-        _hadCallback = true
+          _hadCallback = true
 
-        $reject($error)
-      })
-      .on('exit', $code => {
-        if (_hadCallback) {
-          return
-        }
+          $reject($error)
+        })
+        .on('exit', $code => {
+          if (_hadCallback) {
+            return
+          }
 
-        _hadCallback = true
+          _hadCallback = true
 
-        if ($code === 0) {
-          $resolve()
-        } else {
-          $reject(new Error(`clean script exited with code ${$code}`))
-        }
-      })
+          if ($code === 0) {
+            $resolve()
+          } else {
+            $reject(new Error(`clean script exited with code ${$code}`))
+          }
+        })
+    } catch ($error) {
+      $reject($error)
+    }
   })
 }
 
