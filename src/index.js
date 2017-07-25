@@ -160,6 +160,6 @@ class SequentialPromiseProcessor {
 }
 
 export {
-  SequentialPromiseProcessor,
-  SequentialPromiseProcessor as default
+  SequentialPromiseProcessor as default,
+  SequentialPromiseProcessor
 }
