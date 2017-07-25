@@ -62,6 +62,7 @@
     "build": "webpack",
     "clean": "babel-node scripts/clean.js",
     "distribute": "babel-node scripts/distribute.js",
+    "document": "esdoc",
     "lint": "eslint webpack.config.babel.js scripts/ src/ tasks/",
     "test": "jest"
   },
