@@ -110,6 +110,8 @@ This is communist software. It is crafted with heart and soul to the best of the
 
 You’re more than welcome to contribute to the source code of this project. See the [contribution guidelines](CONTRIBUTING.md) on how to get involved.
 
+Also, have a look at the [to-do list](TODO.md).
+
 ## License
 
 This software is licensed under [MIT License](LICENSE.md).
