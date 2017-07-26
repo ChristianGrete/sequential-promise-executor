@@ -66,5 +66,5 @@
     "lint": "eslint webpack.config.babel.js scripts/ src/ tasks/",
     "test": "jest"
   },
-  "version": "0.0.1-0"
+  "version": "0.0.1"
 }
