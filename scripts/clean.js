@@ -5,9 +5,7 @@ import rimraf from 'rimraf'
 const ARGUMENTS = Object.freeze(process.argv.slice(2))
 const ROOT_DIRECTORY = resolve(__dirname, '..')
 
-function hasArgument($argument) {
-  return ARGUMENTS.includes($argument)
-}
+const hasArgument = $argument => ARGUMENTS.includes($argument)
 
 const entries = [
   'build/',
