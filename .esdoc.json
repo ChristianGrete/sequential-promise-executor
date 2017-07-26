@@ -1,7 +1,8 @@
 {
   "destination": "docs/",
   "includes": [
-    "index\\.js"
+    "isThenable\\.js",
+    "SequentialPromiseProcessor\\.js"
   ],
   "source": "src/"
 }
