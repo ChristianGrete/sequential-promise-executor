@@ -5,4 +5,4 @@ node_js:
   - "stable"
 notifications:
   email: webmaster@christiangrete.com
-script: npm run test
+script: npm run test -- --coverage
