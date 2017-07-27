@@ -30,9 +30,9 @@ import {
 
 const sequentialPromiseProcessor = new SequentialPromiseProcessor()
 ```
-This class is also available as the `default` member, so you don’t need to explicitly import it as a named member.
+The class is also available as the `default` member, so you don’t need to explicitly import it as a named member.
 
-The whole package is distributed using the [UMD](https://github.com/umdjs/umd) pattern.
+This package is distributed using the [UMD](https://github.com/umdjs/umd) pattern and can be required using [RequireJS](http://requirejs.org) or used as a global variable as well.
 
 ## Example
 
