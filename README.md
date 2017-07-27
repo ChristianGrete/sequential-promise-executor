@@ -22,7 +22,7 @@ yarn add @com.christiangrete.libs.js/sequential-promise-processor
 
 ### Usage
 
-Just import it as an ES2015 module and create an instance:
+Just import it as an ES2015 module and create an instance to get started:
 ```js
 import {
   SequentialPromiseProcessor
@@ -30,7 +30,7 @@ import {
 
 const sequentialPromiseProcessor = new SequentialPromiseProcessor()
 ```
-This class is also available as the default member, so you don’t need to explicitly import it as a named member.
+This class is also available as the `default` member, so you don’t need to explicitly import it as a named member.
 
 The whole package is distributed using the [UMD](https://github.com/umdjs/umd) pattern.
 
