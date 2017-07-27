@@ -22,6 +22,20 @@ yarn add @com.christiangrete.libs.js/sequential-promise-processor
 
 ### Usage
 
+Just import it as an ES2015 module and create an instance:
+```js
+import {
+  SequentialPromiseProcessor
+} from '@com.christiangrete.libs.js/sequential-promise-processor'
+
+const sequentialPromiseProcessor = new SequentialPromiseProcessor()
+```
+This class is also available as the default member, so you don’t need to explicitly import it as a named member.
+
+The whole package is distributed using the [UMD](https://github.com/umdjs/umd) pattern.
+
+## Example
+
 Let’s assume that we want to execute `git` commands in a series:
 ```js
 import {
