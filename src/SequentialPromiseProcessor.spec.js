@@ -85,6 +85,7 @@ describe('SequentialPromiseProcessor', () => {
           var _lastCount = 0
 
           const _COUNT = 9
+
           const _factories = []
 
           _isAsync = true
@@ -99,7 +100,7 @@ describe('SequentialPromiseProcessor', () => {
           }
 
           for (let _index = 0; _index < _COUNT; _index ++) {
-            let _factory = createPromiseFactory(
+            const _factory = createPromiseFactory(
               () => _onFulfilled(_index + 1),
               _onRejected,
               _isAsync,
@@ -155,6 +156,72 @@ describe('SequentialPromiseProcessor', () => {
           subject
             .queue(_factory)
             .process()
+        })
+      })
+    })
+
+    describe('.length', () => {
+      var _factories
+
+      const _COUNT = 3
+
+      beforeEach(() => {
+        _factories = []
+      })
+
+      it('is immutable', () => {
+        const _actual = () => subject.length = 1
+
+        expect(_actual).toThrow()
+      })
+
+      it('initially returns zero', () => {
+        expect(subject.length).toBe(0)
+      })
+
+      it('returns count of queued factories', () => {
+        for (let _index = 0; _index < _COUNT; _index ++) {
+          const _factory = createPromiseFactory(
+            _onFulfilled,
+            _onRejected,
+            _isAsync,
+            _isRejection
+          )
+
+          _factories.push(_factory)
+        }
+
+        subject.queue(_factories)
+
+        expect(subject.length).toBe(_COUNT)
+      })
+
+      describe('when promises are processed', () => {
+        it('gets updated', $done => {
+          function _onFulfilled($count) {
+            if ($count === _COUNT) {
+              setTimeout(() => {
+                expect(subject.length).toBe(0)
+                $done()
+              })
+            } else {
+              expect(subject.length).toBeLessThanOrEqual(_COUNT)
+              expect(subject.length).toBeGreaterThan(0)
+            }
+          }
+
+          for (let _index = 0; _index < _COUNT; _index ++) {
+            const _factory = createPromiseFactory(
+              () => _onFulfilled(_index + 1),
+              _onRejected,
+              _isAsync,
+              _isRejection
+            )
+
+            _factories.push(_factory)
+          }
+
+          subject.queue(_factories).process()
         })
       })
     })
