@@ -68,11 +68,14 @@ class SequentialPromiseProcessor {
       }
     }))
 
-    return $factories.length > 0 ? this.queue(...$factories) : this
-  }
+    Object.defineProperties(this, {
+      length: {
+        get: () => store.get(this).queue.length,
+        set: () => {}
+      }
+    })
 
-  get length() {
-    return store.get(this).queue.length
+    return $factories.length > 0 ? this.queue(...$factories) : this
   }
 
   queue(...$factories) {
@@ -157,5 +160,9 @@ class SequentialPromiseProcessor {
     return this
   }
 }
+
+Object.defineProperty(SequentialPromiseProcessor.prototype, 'length', {
+  value: 0
+})
 
 export default SequentialPromiseProcessor

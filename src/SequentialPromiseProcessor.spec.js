@@ -169,13 +169,13 @@ describe('SequentialPromiseProcessor', () => {
         _factories = []
       })
 
-      it('is immutable', () => {
-        const _actual = () => subject.length = 1
-
-        expect(_actual).toThrow()
+      it('initially returns zero', () => {
+        expect(subject.length).toBe(0)
       })
 
-      it('initially returns zero', () => {
+      it('is immutable', () => {
+        subject.length = 1
+
         expect(subject.length).toBe(0)
       })
 
