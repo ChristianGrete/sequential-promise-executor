@@ -70,8 +70,10 @@ class SequentialPromiseProcessor {
 
     Object.defineProperties(this, {
       length: {
-        get: () => store.get(this).queue.length,
-        set: () => {}
+        get() {
+          return store.get(this).queue.length
+        },
+        set() {}
       }
     })
 
