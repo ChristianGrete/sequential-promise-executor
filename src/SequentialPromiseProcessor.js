@@ -71,6 +71,10 @@ class SequentialPromiseProcessor {
     return $factories.length > 0 ? this.queue(...$factories) : this
   }
 
+  get length() {
+    return store.get(this).queue.length
+  }
+
   queue(...$factories) {
     const _queue = store.get(this).queue
 
