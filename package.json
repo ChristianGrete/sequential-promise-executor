@@ -24,6 +24,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1",
     "esdoc": "^1.0.1",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
