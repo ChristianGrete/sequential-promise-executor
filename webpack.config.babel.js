@@ -2,7 +2,7 @@ import {readFileSync} from 'fs'
 import {join} from 'path'
 import upperCamelCase from 'uppercamelcase'
 
-const IS_PRODUCTION = process.argv.slice(2).indexOf('-p') >= 0
+const IS_PRODUCTION = process.argv.slice(2).includes('-p')
 
 const PATHS = Object.freeze(Object.create(null, {
   DIST: {
@@ -58,7 +58,7 @@ const productionConfig = {}
 
 Object.defineProperty(process.env, 'BABEL_ENV', {
   enumerable: true,
-  value: process.env.npm_lifecycle_event
+  value: IS_PRODUCTION ? 'production' : 'development'
 })
 
 export default {
