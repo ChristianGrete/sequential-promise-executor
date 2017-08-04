@@ -37,14 +37,7 @@ const generalConfig = {
     libraryTarget: 'umd',
     path: PATHS.DIST,
     umdNamedDefine: true
-  },
-  plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: join(PATHS.SRC, 'index.d.ts')
-      }
-    ])
-  ]
+  }
 }
 
 const developmentConfig = {
@@ -62,12 +55,15 @@ const developmentConfig = {
   }
 }
 
-const productionConfig = {}
-
-Object.defineProperty(process.env, 'BABEL_ENV', {
-  enumerable: true,
-  value: IS_PRODUCTION ? 'production' : 'development'
-})
+const productionConfig = {
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: join(PATHS.SRC, 'index.d.ts')
+      }
+    ])
+  ]
+}
 
 export default {
   ...generalConfig,
