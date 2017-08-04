@@ -1,3 +1,4 @@
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 import {readFileSync} from 'fs'
 import {join} from 'path'
 import upperCamelCase from 'uppercamelcase'
@@ -36,7 +37,14 @@ const generalConfig = {
     libraryTarget: 'umd',
     path: PATHS.DIST,
     umdNamedDefine: true
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: join(PATHS.SRC, 'index.d.ts')
+      }
+    ])
+  ]
 }
 
 const developmentConfig = {
