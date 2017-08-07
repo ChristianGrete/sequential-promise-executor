@@ -57,7 +57,7 @@ function onRejected($reason) {
 
 class SequentialPromiseProcessor {
   constructor(...$factories) {
-    store.set(this, Object.create(null, {
+    const _store = Object.create(null, {
       queue: {
         value: [],
         writable: true
@@ -66,14 +66,24 @@ class SequentialPromiseProcessor {
         value: STATE_IDLE,
         writable: true
       }
-    }))
+    })
+
+    store.set(this, _store)
 
     Object.defineProperties(this, {
       length: {
         get() {
-          return store.get(this).queue.length
+          return _store.queue.length
         },
         set() {}
+      },
+      unprocessed: {
+        get() {
+          return _store.queue.map($queuer => $queuer.factory)
+        },
+        set($factories) {
+          this.queue($factories)
+        }
       }
     })
 
@@ -163,8 +173,17 @@ class SequentialPromiseProcessor {
   }
 }
 
-Object.defineProperty(SequentialPromiseProcessor.prototype, 'length', {
-  value: 0
+Object.defineProperties(SequentialPromiseProcessor.prototype, {
+  length: {
+    configurable: true,
+    value: 0,
+    writable: true
+  },
+  unprocessed: {
+    configurable: true,
+    value: [],
+    writable: true
+  }
 })
 
 export default SequentialPromiseProcessor
