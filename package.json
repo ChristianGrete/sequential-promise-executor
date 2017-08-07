@@ -46,7 +46,7 @@
   "homepage": "https://github.com/ChristianGrete/sequential-promise-processor",
   "keywords": [],
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index.{d.ts,js}",
   "maintainers": [
     {
       "email": "webmaster@christiangrete.com",
