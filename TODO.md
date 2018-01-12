@@ -8,6 +8,6 @@
 * Add file watcher and hot reloading to generate and serve docs
 * Document source code with ESDoc tags ([see here](https://esdoc.org/manual/tags.html))
 
-Copyright © 2017 ([MIT](LICENSE.md)) [Christian Grete](https://christiangrete.com)
+Copyright © 2017, 2018 ([MIT](LICENSE.md)) [Christian Grete](https://christiangrete.com)
 
 [github-url]: https://github.com/ChristianGrete/sequential-promise-processor

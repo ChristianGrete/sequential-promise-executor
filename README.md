@@ -130,7 +130,7 @@ Also, have a look at the [to-do list](TODO.md).
 
 This software is licensed under [MIT License](LICENSE.md).
 
-Copyright © 2017 [Christian Grete](https://christiangrete.com)
+Copyright © 2017, 2018 [Christian Grete](https://christiangrete.com)
 - [GitHub](https://github.com/ChristianGrete)
 - [npm](https://www.npmjs.com/~christiangrete)
 - [Twitter](https://twitter.com/ChristianGrete)

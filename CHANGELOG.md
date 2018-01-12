@@ -41,7 +41,7 @@ Just a test prerelease to check whether the `distribute` task is doing its job. 
 [Unreleased]: https://github.com/ChristianGrete/sequential-promise-processor/compare/v0.1.0...develop
 [0.1.0]: https://github.com/ChristianGrete/sequential-promise-processor/compare/v0.0.1...v0.1.0
 
-Copyright © 2017 ([MIT](LICENSE.md)) [Christian Grete](https://christiangrete.com)
+Copyright © 2017, 2018 ([MIT](LICENSE.md)) [Christian Grete](https://christiangrete.com)
 
 [github-url]: https://github.com/ChristianGrete/sequential-promise-processor
 [keep-a-changelog-url]: http://keepachangelog.com/en/1.0.0/
