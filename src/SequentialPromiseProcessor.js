@@ -87,7 +87,9 @@ class SequentialPromiseProcessor {
       }
     })
 
-    return $factories.length > 0 ? this.queue(...$factories) : this
+    if ($factories.length > 0) {
+      this.queue(...$factories)
+    }
   }
 
   queue(...$factories) {
