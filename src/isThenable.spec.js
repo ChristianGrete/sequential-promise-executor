@@ -69,7 +69,7 @@ describe('isThenable($value)', () => {
     })
   })
 
-  describe('when invoked with no argument', () => {
+  describe('when invoked without arguments', () => {
     it('returns false', () => {
       expect(subject()).toBe(false)
     })
